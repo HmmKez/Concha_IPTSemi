@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('loans', function (Blueprint $table) {
@@ -16,18 +13,14 @@ return new class extends Migration
             $table->foreignId('member_id')->constrained()->cascadeOnDelete();
             $table->date('loan_date');
             $table->date('due_date');
-            $table->decimal('penalty',8,2)->default(0);
             $table->date('returned_date')->nullable();
-            $table->string('status')->default('borrowed'); 
+            $table->enum('status', ['active', 'returned', 'overdue'])->default('active');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('loans');
     }
 };

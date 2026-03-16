@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('isbn')->nullable();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->text('description')->nullable();
-            $table->integer('quantity');
+            $table->unsignedInteger('quantity')->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('books');
     }
 };

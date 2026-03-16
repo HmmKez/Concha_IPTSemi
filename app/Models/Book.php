@@ -10,6 +10,7 @@ class Book extends Model
         'title',
         'author',
         'isbn',
+        'description',
         'category_id',
         'quantity',
     ];
